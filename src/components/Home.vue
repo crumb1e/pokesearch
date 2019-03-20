@@ -75,7 +75,7 @@ export default {
     },
 
     mounted() {
-        axios.get('http://pokeapi.co/api/v2/pokemon/?limit=1000')
+        axios.get('https://pokeapi.co/api/v2/pokemon/?limit=1000')
             .then(response => {
                 this.pokemon = response.data
                 response.data.results.forEach(element => {
@@ -89,7 +89,7 @@ export default {
 
     methods: {
         fetchPokemon(value) {
-            axios.get(`http://pokeapi.co/api/v2/pokemon/${value}`)
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${value}`)
                 .then(response => {
                     this.singleMon = response.data
                     this.types = this.singleMon.types
@@ -107,7 +107,7 @@ export default {
         },
 
         getSimilar(value) {
-            axios.get(`http://pokeapi.co/api/v2/pokemon/${value}`)
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${value}`)
                 .then(response => {
                     this.tempSimilar = response.data
                     this.similarPoke.push(this.tempSimilar)
