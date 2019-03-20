@@ -1,4 +1,4 @@
-# isaac-hub
+# PokéSearch
 
 ## Project setup
 ```
