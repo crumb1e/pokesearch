@@ -4,7 +4,7 @@
         <p class="m-2">Written by <span><a class="no-underline hover:underline" href="https://twitter.com/crumb1e_">@crumb1e</a></span></p>
         <form class="w-full mx-auto max-w-sm">
         <div class="flex items-center border-b border-b-2 border-teal py-2">
-            <input v-model="searchQuery" class="appearance-none bg-transparent border-none w-full text-grey-darker mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Search for a Pokemon" aria-label="Full name">
+            <input v-model="searchQuery" @submit.prevent="fetchPokemon(searchQuery)" class="appearance-none bg-transparent border-none w-full text-grey-darker mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Search for a Pokemon" aria-label="Full name">
             <button @click="fetchPokemon(searchQuery)" class="flex-no-shrink bg-teal hover:bg-teal-dark border-teal hover:border-teal-dark text-sm border-4 text-white py-1 px-2 rounded" type="button">
             Search
             </button>
