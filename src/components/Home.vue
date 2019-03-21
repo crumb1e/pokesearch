@@ -28,13 +28,12 @@
         <div v-if="singleMon" class="mx-auto mt-4 bg-grey-lighter max-w-sm">
             <img :src="singleMon.sprites.front_default" alt="">
             <h2 class=" mb-2">{{ toUpperCase(singleMon.name) }}</h2>
+            <ul class="list-reset text-left m-4 flex justify-center">
+                <li v-for="type in types" :key="type.slot">
+                    <div :class="typeColour(type.type.name)" class="rounded-full py-2 px-4 mx-2">{{ type.type.name }}</div>
+                </li>
+            </ul>
             <div class=" flex items-stretch">
-                <ul class="list-reset flex-1 text-left m-4">
-                    <p class="font-bold">Types</p>
-                    <li v-for="type in types" :key="type.slot">
-                        <p :class="typeColour(type.type.name)">{{ type.type.name }}</p>
-                    </li>
-                </ul>
                 <ul class="list-reset flex-1 text-left m-4">
                     <p class="font-bold">Stats</p>
                     <li v-for="stat in stats" :key="stat.id">
