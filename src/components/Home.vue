@@ -25,23 +25,10 @@
         </div>
         </form>
 
-        <div v-if="singleMon" class="mx-auto mt-4 bg-grey-lighter max-w-sm">
-            <img :src="singleMon.sprites.front_default" alt="">
-            <h2 class=" mb-2">{{ toUpperCase(singleMon.name) }}</h2>
-            <ul class="list-reset text-left m-4 flex justify-center">
-                <li v-for="type in types" :key="type.slot">
-                    <div :class="typeColour(type.type.name)" class="rounded-full py-2 px-4 mx-2">{{ type.type.name }}</div>
-                </li>
-            </ul>
-            <div class=" flex items-stretch">
-                <ul class="list-reset flex-1 text-left m-4">
-                    <p class="font-bold">Stats</p>
-                    <li v-for="stat in stats" :key="stat.id">
-                        <p>{{ stat.stat.name }}: {{ stat.base_stat }}</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <display-pokemon
+            v-if="singleMon"
+            :pokemon="singleMon"
+        ></display-pokemon>
 
     </div>
 </template>
@@ -49,9 +36,14 @@
 <script>
 import axios from 'axios'
 import resources from '../assets/resources.js'
+import DisplayPokemon from './DisplayPokemon.vue'
 
 export default {
     name: 'Home',
+
+    components: {
+        DisplayPokemon,
+    },
 
     data() {
         return {
@@ -59,8 +51,6 @@ export default {
             pokemonNames: [],
             similarPoke: [],
             singleMon: null,
-            types: [],
-            stats: [],
             searchQuery: '',
             searchError: false,
             tempSimilar: null,
@@ -91,8 +81,6 @@ export default {
             axios.get(`https://pokeapi.co/api/v2/pokemon/${value}`)
                 .then(response => {
                     this.singleMon = response.data
-                    this.types = this.singleMon.types
-                    this.stats = this.singleMon.stats
                     this.clearErrors()
 
                 })
