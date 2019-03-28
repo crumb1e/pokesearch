@@ -41,6 +41,12 @@ import DisplayPokemon from './DisplayPokemon.vue'
 export default {
     name: 'Home',
 
+    beforeRouteEnter (to, from, next) {
+        next(vm => {
+            vm.fetchPokemon(to.params.pokemon)
+        })
+    },
+
     components: {
         DisplayPokemon,
     },
