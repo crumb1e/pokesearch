@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto mt-4 bg-grey-lighter max-w-sm">
+    <div class="mx-auto mt-4 bg-grey-lighter max-w-sm rounded-lg">
         <img :src="pokemon.sprites.front_default" alt="">
         <h2 class=" mb-2">{{ toUpperCase(pokemon.name) }}</h2>
         <ul class="list-reset text-left m-4 flex justify-center">
@@ -27,10 +27,6 @@ export default {
             type: Object,
             required: true,
         }
-    },
-
-    mounted() {
-        console.log(this.pokemon)
     },
 
     methods: {
