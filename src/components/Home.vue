@@ -67,7 +67,7 @@ export default {
             .then(response => {
                 this.pokemon = response.data
                 response.data.results.forEach(element => {
-                    this.pokemonNames.push(element.name)                    
+                    this.pokemonNames.push(element.name)
                 });
             })
             .catch(e => {
@@ -77,6 +77,7 @@ export default {
 
     methods: {
         fetchPokemon(value) {
+            if (value == null) return
             this.$axios.get(`pokemon/${value}`)
                 .then(response => {
                     this.singleMon = response.data
@@ -93,6 +94,7 @@ export default {
         },
 
         getSimilar(value) {
+            if (value == null) return
             this.$axios.get(`pokemon/${value}`)
                 .then(response => {
                     this.tempSimilar = response.data
@@ -129,4 +131,3 @@ export default {
     },
 }
 </script>
-
