@@ -1,34 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import axios from 'axios'
+import anime from 'animejs/lib/anime.es.js'
 import App from './App.vue'
 
 import '@/assets/css/tailwind.css'
 import 'nprogress/nprogress.css'
-import NProgress from 'nprogress'
 import routes from './routes'
+import http from './api'
 
 Vue.use(VueRouter)
 
 Vue.config.productionTip = false
 
-const http = axios.create({
-  baseURL: `https://pokeapi.co/api/v2/`,
-})
-
-NProgress.configure({ easing: 'ease', speed: 1000 })
-
-http.interceptors.request.use(config => {
-  NProgress.start()
-  return config
-})
-
-http.interceptors.response.use(response => {
-  NProgress.done()
-  return response
-})
-
 Vue.prototype.$axios = http
+Vue.prototype.$anim = anime
 
 const router = new VueRouter({
   mode: 'history',
