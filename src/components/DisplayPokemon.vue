@@ -34,7 +34,7 @@
         <div class="flex">
             <ul class="list-reset flex-1 text-left my-4 ml-4 mr-10">
                 <li v-for="(stat, index) in pokemon.stats" :key="index">
-                    <p class="my-3">{{ formatString(stat.stat.name) }}</p>
+                    <p class="my-3">{{ formatString(stat.stat.name) }}: <span :class="`stat_${index}_count`"></span></p>
                     <div class="mr-10">
                       <div :id="`stat_` + index" class="shadow-md bg-blue h-2 rounded-lg" style="width: 0;"></div>
                     </div>
@@ -51,12 +51,23 @@
         </div> -->
 
     </div>
+
+    <damage-info
+        :pokemon-types="types"
+    ></damage-info>
+
   </div>
 </template>
 
 <script>
+import DamageInfo from './DamageInfo.vue'
+
 export default {
     name: 'display-pokemon',
+
+    components: {
+        DamageInfo,
+    },
 
     props: {
         pokemon: {
@@ -75,7 +86,8 @@ export default {
       pokemon: function(value) {
         this.stats = this.pokemon.stats
         for (var i = 0; i < this.stats.length; i++) {
-          this.animateStat(`#stat_${i}`, this.stats[i].base_stat)
+          this.animateStatBar(`#stat_${i}`, this.stats[i].base_stat)
+          this.animateStatValue(`.stat_${i}_count`, this.stats[i].base_stat)
         }
       }
     },
@@ -83,8 +95,20 @@ export default {
     mounted() {
       this.stats = this.pokemon.stats
       for (var i = 0; i < this.stats.length; i++) {
-        this.animateStat(`#stat_${i}`, this.stats[i].base_stat)
+          this.animateStatBar(`#stat_${i}`, this.stats[i].base_stat)
+          this.animateStatValue(`.stat_${i}_count`, this.stats[i].base_stat)
       }
+    },
+
+    computed: {
+        types: function () {
+            let self = this
+            let allTypes = []
+            self.pokemon.types.forEach((element) => {
+                allTypes.push(element)
+            })
+            return allTypes
+        },
     },
 
     methods: {
@@ -96,12 +120,22 @@ export default {
             return value.charAt(0).toUpperCase() + value.slice(1)
         },
 
-        animateStat(element, value) {
+        animateStatBar(element, value) {
           this.$anim({
             targets: element,
             width: `${value}%`,
             easing: 'easeOutSine'
           })
+        },
+
+        animateStatValue(element, value) {
+            console.log('animating: ' + element + ' by this amount: ' + value)
+            this.$anim({
+                targets: element,
+                innerHTML: [0, value],
+                round: 1,
+                easing: 'easeOutSine'
+            })
         },
 
         formatString(string) {
