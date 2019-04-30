@@ -7,6 +7,7 @@ import '@/assets/css/tailwind.css'
 import 'nprogress/nprogress.css'
 import routes from './routes'
 import http from './api'
+import { store } from './store/store'
 
 Vue.use(VueRouter)
 
@@ -22,5 +23,6 @@ const router = new VueRouter({
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

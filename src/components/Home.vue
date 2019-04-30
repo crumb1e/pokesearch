@@ -63,9 +63,9 @@ export default {
     },
 
     mounted() {
-        this.$axios.get('pokemon/?limit=1000')
+        this.$axios.get('pokemon/?limit=151')
             .then(response => {
-                this.pokemon = response.data
+                this.$store.commit('genOne', response.data.results)
                 response.data.results.forEach(element => {
                     this.pokemonNames.push(element.name)
                 });
@@ -81,6 +81,7 @@ export default {
             this.$axios.get(`pokemon/${value}`)
                 .then(response => {
                     this.singleMon = response.data
+                    this.$store.commit('selectPokemon', value)
                     this.clearErrors()
 
                 })
@@ -99,6 +100,7 @@ export default {
                 .then(response => {
                     this.tempSimilar = response.data
                     this.similarPoke.push(this.tempSimilar)
+                    this.$store.commit('similarPokemon', value)
                 })
         },
 
