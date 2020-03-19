@@ -119,6 +119,7 @@ export default {
         },
 
         navigate(query) {
+            query = query.toLowerCase()
             this.$router.push(query)
             this.fetchPokemon(query)
         },
