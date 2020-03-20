@@ -1,25 +1,29 @@
 <template>
-  <div class="wrapper">
-    <div class="mx-auto mt-4 bg-grey-lighter max-w-sm rounded-lg static relative">
-      <div class="absolute pin-r pin-t h-full">
-        <div class="writing-mode-vertical sticky pin-t flex w-full">
-          <h1 class="flex-row-reverse py-3">Overview</h1>
+  <div>
+    <div class="mt-4 bg-gray-200 rounded relative">
+      <div class="absolute right-0 top-0 h-full">
+        <div class="vertical-text sticky top-0 flex w-full">
+          <h1 class="text-2xl">Overview</h1>
         </div>
       </div>
 
-        <img :src="pokemon.sprites.front_default" alt="">
-        <h2 class=" mb-2">{{ toUpperCase(pokemon.name) }}</h2>
-        <ul class="list-reset text-left m-4 flex justify-center">
+      <div class="flex flex-col items-center">
+        <img :src="pokemon.sprites.front_default" :alt="pokemon.name">
+        <h2 class="mb-2">{{ toUpperCase(pokemon.name) }}</h2>
+        <ul class="text-left m-4 flex justify-center">
             <li v-for="type in pokemon.types" :key="type.slot">
-                <div :class="typeColour(type.type.name)" class="shadow-md rounded-full py-2 px-4 mx-2 mb-4">{{ type.type.name }}</div>
+                <div :class="typeColour(type.type.name)" class="shadow-md rounded-full py-2 px-4 mx-2 mb-4">
+                  <p>{{ type.type.name }}</p>
+                </div>
             </li>
         </ul>
+      </div>
 
 
         <div>
-          <ul class="list-reset flex m-4 pb-6">
-            <li class="flex-1 shadow px-2 py-4 mx-4 rounded-lg">Height: {{ pokemon.height / 10 }}m</li>
-            <li class="flex-1 shadow px-2 py-4 mx-4 rounded-lg">Weight: {{ pokemon.weight / 10 }}kg</li>
+          <ul class="flex flex-row justify-around m-4 pb-6">
+            <li class="shadow w-1/2 px-2 py-4 mx-4 rounded-lg text-center">Height: {{ pokemon.height / 10 }}m</li>
+            <li class="shadow w-1/2 px-2 py-4 mx-4 rounded-lg text-center">Weight: {{ pokemon.weight / 10 }}kg</li>
           </ul>
         </div>
     </div>
@@ -83,7 +87,7 @@ export default {
     },
 
     watch: {
-      pokemon: function(value) {
+      pokemon: function() {
         this.stats = this.pokemon.stats
         for (var i = 0; i < this.stats.length; i++) {
           this.animateStatBar(`#stat_${i}`, this.stats[i].base_stat)
@@ -129,6 +133,7 @@ export default {
         },
 
         animateStatValue(element, value) {
+            // eslint-disable-next-line
             console.log('animating: ' + element + ' by this amount: ' + value)
             this.$anim({
                 targets: element,

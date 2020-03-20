@@ -3,3 +3,7 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.vertical-text {
+    writing-mode: vertical-lr;
+}

@@ -1,11 +1,11 @@
 <template>
-    <div class=" container max-w-md">
+    <div class="flex flex-col items-center">
         <h1 class="m-4">PokéSearch</h1>
-        <p class="m-2">Written by <span><a class="no-underline hover:underline" href="https://twitter.com/crumb1e_">@crumb1e</a></span></p>
+        <p class="m-2">Written by <span><a class="hover:underline" href="https://twitter.com/crumb1e_">@crumb1e</a></span></p>
         <form @submit.prevent="navigate(searchQuery)" class="w-full mx-auto max-w-sm">
-        <div class="flex items-center border-b border-b-2 border-teal py-2">
-            <input v-model="searchQuery" class="appearance-none bg-transparent border-none w-full text-grey-darker mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Search for a Pokemon" aria-label="Full name">
-            <button @click="navigate(searchQuery)" class="flex-no-shrink bg-teal hover:bg-teal-dark border-teal hover:border-teal-dark text-sm border-4 text-white py-1 px-2 rounded" type="button">
+        <div class="flex items-center border-b border-b-2 border-teal-400 py-2">
+            <input v-model="searchQuery" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Search for a Pokemon" aria-label="Full name">
+            <button @click="navigate(searchQuery)" class="flex-no-shrink bg-teal-400 hover:bg-teal-600 border-teal-400 hover:border-teal-600 text-sm border-4 text-white py-1 px-2 rounded" type="button">
             Search
             </button>
         </div>
@@ -15,9 +15,9 @@
             <p>Did you mean: </p>
             <ul class="list-reset pt-2 flex flex-wrap -mx-2 overflow-hidden">
                 <li v-for="pokemon in similarPoke" :key="pokemon.id" class="my-2 px-2 w-1/4 overflow-hidden sm:w-1/3 md:w-1/3">
-                    <div class="hover:underline hover:bg-grey-lightest cursor-pointer" @click="navigate(pokemon.name)">
+                    <div class="flex flex-col items-center text-center hover:underline hover:bg-gray-200 rounded cursor-pointer" @click="navigate(pokemon.name)">
                         <img :src="pokemon.sprites.front_default" :alt="pokemon.name">
-                        <a  class="no-underline">{{ pokemon.name }}</a>
+                        <a>{{ pokemon.name }}</a>
                     </div>
                 </li>
             </ul>
